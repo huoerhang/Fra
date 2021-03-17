@@ -9,8 +9,13 @@ namespace System
 {
     public static class StringExtensions
     {
-        public static bool IsNullOrEmpty(this string source)
+        public static bool IsNullOrEmpty(this string source, bool allowWhiteSpace = false)
         {
+            if (!allowWhiteSpace)
+            {
+                source = source?.Trim();
+            }
+
             return string.IsNullOrEmpty(source);
         }
 
@@ -21,7 +26,7 @@ namespace System
 
         public static string CheckNotNullOrEmpty(this string source, string parameterName)
         {
-            if (source.IsNullOrWhiteSpace())
+            if (source.IsNullOrEmpty())
             {
                 throw new ArgumentNullException(parameterName);
             }
@@ -86,6 +91,53 @@ namespace System
 
                 return sb.ToString();
             }
+        }
+
+        public static string[] SplitToLines(this string source, string separator)
+        {
+            return source.Split(Environment.NewLine);
+        }
+
+        public static string NormalizeLines(this string str)
+        {
+            return str.Replace("\r\n", "\n").Replace("\r", "\n").Replace("\n", Environment.NewLine);
+        }
+
+
+        public static ReadOnlySpan<char> Left(this string source, int length)
+        {
+            source.CheckNotNullOrEmpty(nameof(source));
+
+            if (source.Length < length)
+            {
+                throw new ArgumentException($"{nameof(length)} argument can not be bigger than string's length!");
+            }
+
+            return source.AsSpan(0, length);
+        }
+
+        public static ReadOnlySpan<char> Right(this string source,int length)
+        {
+            source.CheckNotNullOrEmpty(source);
+
+            if (source.Length < length)
+            {
+                throw new ArgumentException($"{nameof(length)} argument can not be bigger than string's length!");
+            }
+
+            return source.AsSpan(0, length);
+        }
+
+        public static bool StartsWith(this string source,char c, StringComparison comparisonType = StringComparison.Ordinal)
+        {
+            if (source.IsNullOrEmpty())
+            {
+                return false;
+            }
+
+            char start = source[0];
+
+            return source.StartsWith(c.ToString(), comparisonType);
         }
     }
 }
