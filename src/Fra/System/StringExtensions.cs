@@ -24,30 +24,10 @@ namespace System
             return string.IsNullOrWhiteSpace(source);
         }
 
-        public static string CheckNotNullOrEmpty(this string source, string parameterName)
-        {
-            if (source.IsNullOrEmpty())
-            {
-                throw new ArgumentNullException(parameterName);
-            }
-
-            return source;
-        }
-
-        public static string CheckNotNullOrWhiteSpace(this string source, string parameterName)
-        {
-            if (source.IsNullOrWhiteSpace())
-            {
-                throw new ArgumentException(parameterName);
-            }
-
-            return source;
-        }
-
         public static T ToEnum<T>(this string source, bool ignoreCase)
             where T : Enum
         {
-            source.CheckNotNullOrEmpty(nameof(source));
+            source.CheckNotNull(nameof(source));
 
             return (T)Enum.Parse(typeof(T), source, ignoreCase);
         }
@@ -55,14 +35,14 @@ namespace System
         public static T ToEnum<T>(this string source)
             where T : Enum
         {
-            source.CheckNotNullOrEmpty(nameof(source));
+            source.CheckNotNull(nameof(source));
 
             return (T)Enum.Parse(typeof(T), source);
         }
 
         public static byte[] GetBytes(this string source, Encoding encoding)
         {
-            source.CheckNotNullOrEmpty(nameof(source));
+            source.CheckNotNull(nameof(source));
             encoding.CheckNotNull(nameof(encoding));
 
             return encoding.GetBytes(source);
@@ -75,7 +55,10 @@ namespace System
 
         public static string ToMd5(this string source)
         {
-            source.CheckNotNullOrEmpty(nameof(source));
+            if (source.IsNullOrWhiteSpace())
+            {
+                return source;
+            }
 
             using (var md5 = MD5.Create())
             {
@@ -93,6 +76,44 @@ namespace System
             }
         }
 
+        public static string ToBase64(this string source, Encoding encoding)
+        {
+            encoding.CheckNotNull(nameof(encoding));
+
+            if (source.IsNullOrWhiteSpace())
+            {
+                return source;
+            }
+
+            byte[] bytes = source.GetBytes();
+
+            return Convert.ToBase64String(bytes);
+        }
+
+        public static string ToBase64(this string source)
+        {
+            return source.ToBase64(Encoding.UTF8);
+        }
+
+        public static string FromBase64(this string base64Source, Encoding encoding)
+        {
+            encoding.CheckNotNull(nameof(encoding));
+
+            if (base64Source.IsNullOrWhiteSpace())
+            {
+                return base64Source;
+            }
+
+            byte[] bytes = Convert.FromBase64String(base64Source);
+
+            return encoding.GetString(bytes);
+        }
+
+        public static string FromBase64(this string base64Source)
+        {
+            return base64Source.FromBase64(Encoding.UTF8);
+        }
+
         public static string[] SplitToLines(this string source, string separator)
         {
             return source.Split(Environment.NewLine);
@@ -106,7 +127,7 @@ namespace System
 
         public static ReadOnlySpan<char> Left(this string source, int length)
         {
-            source.CheckNotNullOrEmpty(nameof(source));
+            source.CheckNotNull(nameof(source));
 
             if (source.Length < length)
             {
@@ -116,9 +137,9 @@ namespace System
             return source.AsSpan(0, length);
         }
 
-        public static ReadOnlySpan<char> Right(this string source,int length)
+        public static ReadOnlySpan<char> Right(this string source, int length)
         {
-            source.CheckNotNullOrEmpty(source);
+            source.CheckNotNull(source);
 
             if (source.Length < length)
             {
@@ -128,16 +149,54 @@ namespace System
             return source.AsSpan(0, length);
         }
 
-        public static bool StartsWith(this string source,char c, StringComparison comparisonType = StringComparison.Ordinal)
+        public static bool StartsWith(this string source, char c, StringComparison comparisonType = StringComparison.Ordinal)
         {
             if (source.IsNullOrEmpty())
             {
                 return false;
             }
 
-            char start = source[0];
-
             return source.StartsWith(c.ToString(), comparisonType);
+        }
+
+        public static bool EndsWith(this string source, char c, StringComparison comparisonType = StringComparison.Ordinal)
+        {
+            if (source.IsNullOrEmpty())
+            {
+                return false;
+            }
+
+            return source.EndsWith(c.ToString(), comparisonType);
+        }
+
+        public static string EnsureStartsWith(this string source, char c, StringComparison comparisonType = StringComparison.Ordinal)
+        {
+            if (source.IsNullOrEmpty())
+            {
+                return source;
+            }
+
+            if (source.StartsWith(c, comparisonType))
+            {
+                return source;
+            }
+
+            return c + source;
+        }
+
+        public static string EnsureEndsWith(this string source, char c, StringComparison comparisonType = StringComparison.Ordinal)
+        {
+            if (source.IsNullOrEmpty())
+            {
+                return source;
+            }
+
+            if (source.EndsWith(c, comparisonType))
+            {
+                return source;
+            }
+
+            return source + c;
         }
     }
 }
