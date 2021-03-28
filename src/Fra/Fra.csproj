@@ -6,7 +6,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <Folder Include="Fra\" />
+	  <Folder Include="Fra\DependencyInjection\" />
 	</ItemGroup>
 
 </Project>
