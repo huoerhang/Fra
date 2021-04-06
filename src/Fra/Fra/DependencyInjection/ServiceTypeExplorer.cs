@@ -8,24 +8,30 @@ namespace Fra.DependencyInjection
 {
     internal static class ServiceTypeExplorer
     {
-        private static IServiceTypeProvider _defaultServiceTypeProvider = new DefaultServiceTypeProvider();
+        //private static IServiceTypeProvider _defaultServiceTypeProvider = new DefaultServiceTypeProvider();
 
-        internal static ServiceTypeProviderContainer ServiceTypesProviderContainer
-        {
-            get
-            {
-                return ServiceTypeProviderContainer.Instance;
-            }
-        }
+        //internal static ServiceTypeProviderContainer ServiceTypesProviderContainer
+        //{
+        //    get
+        //    {
+        //        return ServiceTypeProviderContainer.Instance;
+        //    }
+        //}
 
-        internal static List<Type> GetServiceTypes(Type type)
-        {
-            List<Type> types = ServiceTypesProviderContainer
-                .DefaultIfEmpty(_defaultServiceTypeProvider)
-                .SelectMany(c => c.GetServiceTypes(type))
-                .ToList();
+        //internal static List<ServiceTypeDescriptor> GetServiceTypeDescriptors(Type implementationType)
+        //{
+        //    //List<ServiceTypeDescriptor> serviceTypeDescriptors= ServiceTypesProviderContainer.
+        //    return null;
+        //}
 
-            return types;
-        }
+        //internal static List<Type> GetServiceTypes(Type type)
+        //{
+        //    List<Type> types = ServiceTypesProviderContainer
+        //        .DefaultIfEmpty(_defaultServiceTypeProvider)
+        //        .SelectMany(c => c.GetServiceTypes(type))
+        //        .ToList();
+
+        //    return types;
+        //}
     }
 }

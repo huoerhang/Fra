@@ -10,14 +10,14 @@ namespace Fra.DependencyInjection
         public override void AddType(IServiceCollection services, Type type)
         {
             var lifetime = GetServiceLifetime(type);
-            List<Type> serviceTypes = ServiceTypeExplorer.GetServiceTypes(type);
+            //List<Type> serviceTypes = ServiceTypeExplorer.GetServiceTypes(type);
 
-            foreach(var serviceType in serviceTypes)
-            {
-                var serviceDescriptor = ServiceDescriptor.Describe(serviceType, type, lifetime);
+            //foreach(var serviceType in serviceTypes)
+            //{
+            //    var serviceDescriptor = ServiceDescriptor.Describe(serviceType, type, lifetime);
 
-                services.Add(serviceDescriptor);
-            }
+            //    services.Add(serviceDescriptor);
+            //}
         }
 
         protected virtual ServiceLifetime GetServiceLifetime(Type type)

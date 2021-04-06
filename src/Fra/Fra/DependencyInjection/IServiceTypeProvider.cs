@@ -4,6 +4,8 @@ namespace Fra.DependencyInjection
 {
     public interface IServiceTypeProvider
     {
-        Type[] GetServiceTypes(Type targetType);
+        ServiceTypeDescriptor GetServiceTypeDescriptor(Type implementationType);
+
+        //Type[] GetServiceTypes(Type targetType);
     }
 }

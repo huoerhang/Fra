@@ -10,6 +10,6 @@ namespace System
     {
         public static bool IsBetween<T>(this T value, T minValue, T maxValue)
             where T : IComparable<T>
-            => value.CompareTo(minValue) >= 0 && value.CompareTo(maxValue) <= 0
+            => value.CompareTo(minValue) >= 0 && value.CompareTo(maxValue) <= 0;
     }
 }

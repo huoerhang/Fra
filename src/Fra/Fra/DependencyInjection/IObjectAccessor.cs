@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Fra.DependencyInjection
 {
-    public class ServiceTypeProviderContainer : List<IServiceTypeProvider>
+    public interface IObjectAccessor<out T>
     {
+        T Value { get; }
     }
 }

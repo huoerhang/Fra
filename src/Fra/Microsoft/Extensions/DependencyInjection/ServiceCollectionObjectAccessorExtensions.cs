@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Fra.DependencyInjection
+namespace Microsoft.Extensions.DependencyInjection
 {
-    public class ServiceTypeProviderContainer : List<IServiceTypeProvider>
+    public static class ServiceCollectionObjectAccessorExtensions
     {
+
     }
 }
