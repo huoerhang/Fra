@@ -1,14 +1,14 @@
 ﻿namespace Fra.DependencyInjection
 {
-    public class ObjectAccessor<T> : IObjectAccessor<T>
+    internal class ObjectInstanceAccessor<T>
     {
 
-        public ObjectAccessor()
+        public ObjectInstanceAccessor()
         {
 
         }
 
-        public ObjectAccessor(T value)
+        public ObjectInstanceAccessor(T value)
         {
             Value = value;
         }

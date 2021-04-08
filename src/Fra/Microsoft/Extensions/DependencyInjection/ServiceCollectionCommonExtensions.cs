@@ -18,12 +18,25 @@ namespace Microsoft.Extensions.DependencyInjection
             return services.IsAdded(typeof(T));
         }
 
+        public static void AddRange(this IServiceCollection services, params ServiceDescriptor[] serviceDescriptors)
+        {
+            if (serviceDescriptors.IsNullOrEmpty())
+            {
+                return;
+            }
+
+            foreach (var item in serviceDescriptors)
+            {
+                services.Add(item);
+            }
+        }
+
         public static T GetFirstInstanceOrNull<T>(this IServiceCollection services)
         {
             return (T)services.FirstOrDefault(c => c.ServiceType == typeof(T))?.ImplementationInstance;
         }
 
-        public static T GetSingletonInstance<T>(this IServiceCollection services)
+        public static T GetSingleInstance<T>(this IServiceCollection services)
         {
             var service = services.GetFirstInstanceOrNull<T>();
 

@@ -8,5 +8,9 @@ namespace Fra.DependencyInjection
 {
     public class ServiceTypeProviderContainer : List<IServiceTypeProvider>
     {
+        internal ServiceTypeProviderContainer()
+        {
+
+        }
     }
 }
