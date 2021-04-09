@@ -9,7 +9,7 @@ namespace Fra.DependencyInjection
         public override ServiceTypeDescriptor GetServiceTypeDescriptor(Type implementationType)
         {
             var typeInfo = implementationType.GetTypeInfo();
-            var attribute = typeInfo.GetCustomAttribute<DependencyAttribute>();
+            var attribute = typeInfo.GetCustomAttribute<DependencyAttribute>(true);
 
             if (attribute == null)
             {
