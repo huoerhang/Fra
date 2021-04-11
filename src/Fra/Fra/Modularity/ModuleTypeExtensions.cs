@@ -11,7 +11,7 @@ namespace Fra.Modularity
     {
         public static void CheckEntryModuleType(this Type type)
         {
-            if (!type.IsAssignableTo<IAppEntryModule>())
+            if (!type.IsAssignableTo<IFraEntryModule>())
             {
                 throw new Exception($"The {type.AssemblyQualifiedName} is not IAppEntryModule");
             }
@@ -24,7 +24,7 @@ namespace Fra.Modularity
             return typeInfo.IsClass
                 && !typeInfo.IsAbstract
                 && !typeInfo.IsGenericType
-                && typeInfo.IsAssignableTo<IAppModule>();
+                && typeInfo.IsAssignableTo<IFraModule>();
         }
 
         public static void CheckAppModuleType(this Type type)

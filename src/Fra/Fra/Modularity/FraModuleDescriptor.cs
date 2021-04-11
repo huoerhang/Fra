@@ -5,28 +5,28 @@ using System.Reflection;
 
 namespace Fra.Modularity
 {
-    public class AppModuleDescriptor
+    public class FraModuleDescriptor
     {
-        private readonly List<AppModuleDescriptor> _dependencies;
+        private readonly List<FraModuleDescriptor> _dependencies;
 
-        internal AppModuleDescriptor(IAppModule instance)
+        internal FraModuleDescriptor(IFraModule instance)
         {
             ModuleType = instance.GetType();
             Assembly = ModuleType.Assembly;
             Instance = instance;
 
-            _dependencies = new List<AppModuleDescriptor>();
+            _dependencies = new List<FraModuleDescriptor>();
         }
 
         public Assembly Assembly { get; }
 
         public Type ModuleType { get; }
 
-        public IAppModule Instance { get; }
+        public IFraModule Instance { get; }
 
-        public IReadOnlyCollection<AppModuleDescriptor> Dependencies => _dependencies.ToImmutableList();
+        public IReadOnlyCollection<FraModuleDescriptor> Dependencies => _dependencies.ToImmutableList();
 
-        public void AddDepoendency(AppModuleDescriptor appModuleDescriptor)
+        public void AddDepoendency(FraModuleDescriptor appModuleDescriptor)
         {
             _dependencies.Add(appModuleDescriptor);
         }

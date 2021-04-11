@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Fra
+namespace Fra.Modularity
 {
-    public interface IApplicationLifetimeResponder
+    public interface IFraEntryModule : IFraModule
     {
     }
 }

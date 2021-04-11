@@ -9,7 +9,7 @@ namespace Fra.Modularity
 {
     internal class ModuleLoader
     {
-        public AppModuleDescriptor[] LoadModules(IServiceCollection services, Type appEntryModuleType)
+        public FraModuleDescriptor[] LoadModules(IServiceCollection services, Type appEntryModuleType)
         {
             services.CheckNotNull(nameof(services));
             appEntryModuleType.CheckEntryModuleType();
@@ -19,7 +19,7 @@ namespace Fra.Modularity
             return sortedDescriptors.ToArray();
         }
 
-        private List<AppModuleDescriptor> SortByDependency(List<AppModuleDescriptor> descriptors, Type appEntryModuleType)
+        private List<FraModuleDescriptor> SortByDependency(List<FraModuleDescriptor> descriptors, Type appEntryModuleType)
         {
             var sorted = descriptors.SortByDependencies(c => c.Dependencies);
             sorted.MoveItem(c => c.ModuleType == appEntryModuleType, descriptors.Count - 1);
@@ -27,25 +27,25 @@ namespace Fra.Modularity
             return sorted;
         }
 
-        private List<AppModuleDescriptor> GetAppModuleDescriptors(IServiceCollection services, Type appEntryModule)
+        private List<FraModuleDescriptor> GetAppModuleDescriptors(IServiceCollection services, Type appEntryModule)
         {
-            var appModuleDescriptors = new List<AppModuleDescriptor>();
+            var appModuleDescriptors = new List<FraModuleDescriptor>();
             FillModules(services, appEntryModule, appModuleDescriptors);
             SetDependencies(appModuleDescriptors);
 
             return appModuleDescriptors;
         }
 
-        private void FillModules(IServiceCollection services, Type appEntryModule, List<AppModuleDescriptor> appModuleDescriptors)
+        private void FillModules(IServiceCollection services, Type appEntryModule, List<FraModuleDescriptor> appModuleDescriptors)
         {
-            foreach (var moduleType in AppModuleHelper.FindAllModuleTypes(appEntryModule))
+            foreach (var moduleType in FraModuleHelper.FindAllModuleTypes(appEntryModule))
             {
                 var moduleDescriptor = CreateModuleDescriptor(services, moduleType);
                 appModuleDescriptors.Add(moduleDescriptor);
             }
         }
 
-        private void SetDependencies(List<AppModuleDescriptor> appModuleDescriptors)
+        private void SetDependencies(List<FraModuleDescriptor> appModuleDescriptors)
         {
             foreach (var descriptor in appModuleDescriptors)
             {
@@ -53,26 +53,26 @@ namespace Fra.Modularity
             }
         }
 
-        private AppModuleDescriptor CreateModuleDescriptor(IServiceCollection services, Type moduleType)
+        private FraModuleDescriptor CreateModuleDescriptor(IServiceCollection services, Type moduleType)
         {
             var module = CreateAndRegisterModule(services, moduleType);
 
-            return new AppModuleDescriptor(module);
+            return new FraModuleDescriptor(module);
         }
 
-        private IAppModule CreateAndRegisterModule(IServiceCollection services, Type moduleType)
+        private IFraModule CreateAndRegisterModule(IServiceCollection services, Type moduleType)
         {
-            var module = (IAppModule)Activator.CreateInstance(moduleType);
+            var module = (IFraModule)Activator.CreateInstance(moduleType);
             services.AddSingleton(moduleType, module);
 
             return module;
         }
 
-        private void SetDependencies(AppModuleDescriptor appModuleDescriptor, List<AppModuleDescriptor> appModuleDescriptors)
+        private void SetDependencies(FraModuleDescriptor appModuleDescriptor, List<FraModuleDescriptor> appModuleDescriptors)
         {
             var moduleType = appModuleDescriptor.ModuleType;
 
-            foreach (var dependedModuleType in AppModuleHelper.FindDependedModuleTypes(moduleType))
+            foreach (var dependedModuleType in FraModuleHelper.FindDependedModuleTypes(moduleType))
             {
                 var depended = appModuleDescriptors.FirstOrDefault(c => c.ModuleType == dependedModuleType);
 
