@@ -1,6 +1,9 @@
-﻿using System;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -37,6 +40,30 @@ namespace Fra.Modularity
         public virtual void PreConfigureServices(ServiceConfigurationContext context)
         {
 
+        }
+
+        protected void Configure<TOptions>(Action<TOptions> configureAction)
+            where TOptions : class
+        {
+            ServiceConfigurationContext.Services.Configure(configureAction);
+        }
+
+        protected void Configure<TOptions>(string name, Action<TOptions> configureAction)
+            where TOptions : class
+        {
+            ServiceConfigurationContext.Services.Configure(name, configureAction);
+        }
+
+        protected void Configure<TOptions>(string name, IConfiguration configuration)
+            where TOptions : class
+        {
+            ServiceConfigurationContext.Services.Configure<TOptions>(name, configuration);
+        }
+
+        protected void Configure<TOptions>(IConfiguration configuration, Action<BinderOptions> configureBinder)
+            where TOptions : class
+        {
+            ServiceConfigurationContext.Services.Configure<TOptions>(configuration, configureBinder);
         }
     }
 }

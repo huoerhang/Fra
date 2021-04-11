@@ -3,12 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Fra.Modularity;
 
-namespace Fra
+namespace Fra.Modularity
 {
-    public interface IApplication
+    public interface IAppEntryModule : IAppModule, IModuleContainer
     {
-
     }
 }
