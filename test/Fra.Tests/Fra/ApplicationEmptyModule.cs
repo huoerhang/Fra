@@ -8,7 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Fra.Tests.Fra
 {
-    [DependsOnAtribute(typeof(DependenApplicationEmptyModule))]
+    [DependsOnAttribute(typeof(DependenApplicationEmptyModule))]
     public class ApplicationEmptyModule : AppModule, IAppEntryModule
     {
         public override void PreConfigureServices(ServiceConfigurationContext context)
@@ -18,7 +18,7 @@ namespace Fra.Tests.Fra
 
         public override void ConfigureServices(ServiceConfigurationContext context)
         {
-            context.Services.AddAssemblyOf<ApplicationEmptyModule>();
+            //context.Services.AddAssemblyOf<ApplicationEmptyModule>();
             Console.WriteLine($"{nameof(ApplicationEmptyModule.ConfigureServices)}");
         }
 

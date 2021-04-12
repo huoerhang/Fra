@@ -22,6 +22,8 @@ namespace Fra.DependencyInjection
             _lifetime = lifetime;
         }
 
+        public bool IncludeSelf { get; set; } = false;
+
         public ServiceLifetime Lifetime
             => _lifetime;
     }

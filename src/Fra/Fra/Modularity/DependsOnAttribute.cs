@@ -3,11 +3,11 @@
 namespace Fra.Modularity
 {
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
-    public class DependsOnAtribute : Attribute, IDependedTypesProvider
+    public class DependsOnAttribute : Attribute, IDependedTypesProvider
     {
         private readonly Type[] _dependendTypes;
 
-        public DependsOnAtribute(params Type[] dependedTypes)
+        public DependsOnAttribute(params Type[] dependedTypes)
         {
             _dependendTypes = dependedTypes ?? new Type[0];
         }

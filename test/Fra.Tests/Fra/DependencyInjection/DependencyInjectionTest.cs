@@ -20,6 +20,8 @@ namespace Fra.Tests.Fra.DependencyInjection
             cat.Eat();
             var dog = serviceProvider.GetService<IDog>();
             dog.Eat();
+            var tigger = serviceProvider.GetService<Tigger>();
+            tigger.Eat();
         }
     }
 }

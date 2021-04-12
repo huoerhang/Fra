@@ -16,9 +16,13 @@ namespace Fra.DependencyInjection
                 return null;
             }
 
-            //var serviceTypes = typeInfo.GetInterfaces().Where(c => c.Name == "I" + implementationType.Name);
-            var serviceTypes = typeInfo.GetInterfaces();
+            var serviceTypes = typeInfo.GetInterfaces().ToList();
             var lifetime = attribute.Lifetime;
+
+            if (attribute.IncludeSelf)
+            {
+                serviceTypes.Add(implementationType);
+            }
 
             return new ServiceTypeDescriptor(serviceTypes, implementationType, lifetime);
         }

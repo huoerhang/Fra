@@ -49,6 +49,8 @@ namespace Fra
                 {
                     fraModule.ServiceConfigurationContext = context;
                 }
+
+                Services.AddAssembly(module.ModuleType.Assembly);
             }
 
             ExecutePreConfigureServices(context);
