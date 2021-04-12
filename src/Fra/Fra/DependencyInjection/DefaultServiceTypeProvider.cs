@@ -20,9 +20,6 @@ namespace Fra.DependencyInjection
             var lifetime = attribute.Lifetime;
 
             return new ServiceTypeDescriptor(serviceTypes, implementationType, lifetime);
-            //var serviceLifetime = base.GetServiceLifetime(implementationType);
-
-            //return new ServiceTypeDescriptor(serviceTypes, implementationType, serviceLifetime);
         }
     }
 }
