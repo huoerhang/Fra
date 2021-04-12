@@ -12,6 +12,8 @@ namespace Fra
 
         IServiceProvider ServiceProvider { get; }
 
+        void Initialize();
+
         void ShutDown();
     }
 }

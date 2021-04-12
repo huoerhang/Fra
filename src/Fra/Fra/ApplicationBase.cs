@@ -7,7 +7,6 @@ namespace Fra
 {
     public abstract class ApplicationBase : IApplication
     {
-
         protected ApplicationBase(Type appEntryModuleType, IServiceCollection services, Action<ApplicationCreationOptions> optionsAction)
         {
             appEntryModuleType.CheckNotNull(nameof(appEntryModuleType));
@@ -30,7 +29,7 @@ namespace Fra
 
         public IServiceCollection Services { get; }
 
-        public IServiceProvider ServiceProvider { get; }
+        public IServiceProvider ServiceProvider { get; protected set; }
 
         public IReadOnlyCollection<AppModuleDescriptor> Modules { get; }
 
@@ -52,9 +51,9 @@ namespace Fra
                 }
             }
 
-            InvokePreConfigureServices(context);
-            InvokeConfigureServices(context);
-            InvokePostConfigureServices(context);
+            ExecutePreConfigureServices(context);
+            ExecuteConfigureServices(context);
+            ExecutePostConfigureServices(context);
 
             foreach (var module in Modules)
             {
@@ -65,7 +64,7 @@ namespace Fra
             }
         }
 
-        private void InvokePreConfigureServices(ServiceConfigurationContext context)
+        private void ExecutePreConfigureServices(ServiceConfigurationContext context)
         {
             try
             {
@@ -80,7 +79,7 @@ namespace Fra
             }
         }
 
-        private void InvokeConfigureServices(ServiceConfigurationContext context)
+        private void ExecuteConfigureServices(ServiceConfigurationContext context)
         {
             try
             {
@@ -95,7 +94,7 @@ namespace Fra
             }
         }
 
-        private void InvokePostConfigureServices(ServiceConfigurationContext context)
+        private void ExecutePostConfigureServices(ServiceConfigurationContext context)
         {
             try
             {
@@ -110,14 +109,17 @@ namespace Fra
             }
         }
 
+        public virtual void Initialize()
+        {
+        }
+
         public virtual void ShutDown()
         {
             //throw new NotImplementedException();
         }
 
-        public void Dispose()
+        public virtual void Dispose()
         {
-            throw new NotImplementedException();
         }
     }
 }

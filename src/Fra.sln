@@ -5,7 +5,11 @@ VisualStudioVersion = 16.0.30804.86
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{B254B318-7340-43DE-BF1C-9ABD227CC6A5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fra", "Fra\Fra.csproj", "{CD3B68AA-C5A1-49CE-ADD9-CF9D5EB21037}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fra", "Fra\Fra.csproj", "{CD3B68AA-C5A1-49CE-ADD9-CF9D5EB21037}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{3B270F47-F416-48F8-8A63-7C9B3BA64EB4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fra.Tests", "..\test\Fra.Tests\Fra.Tests.csproj", "{8DE1CA03-2F24-4993-A5F1-5113F626BBD4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,12 +21,17 @@ Global
 		{CD3B68AA-C5A1-49CE-ADD9-CF9D5EB21037}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CD3B68AA-C5A1-49CE-ADD9-CF9D5EB21037}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CD3B68AA-C5A1-49CE-ADD9-CF9D5EB21037}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8DE1CA03-2F24-4993-A5F1-5113F626BBD4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8DE1CA03-2F24-4993-A5F1-5113F626BBD4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8DE1CA03-2F24-4993-A5F1-5113F626BBD4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8DE1CA03-2F24-4993-A5F1-5113F626BBD4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{CD3B68AA-C5A1-49CE-ADD9-CF9D5EB21037} = {B254B318-7340-43DE-BF1C-9ABD227CC6A5}
+		{8DE1CA03-2F24-4993-A5F1-5113F626BBD4} = {3B270F47-F416-48F8-8A63-7C9B3BA64EB4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7F78880D-15E3-4591-B562-AE4BE3DD068E}

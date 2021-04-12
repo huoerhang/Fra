@@ -8,7 +8,7 @@ namespace Microsoft.Extensions.DependencyInjection
     {
         public static IServiceCollection AddObjectInstance<T>(this IServiceCollection services, T instance)
         {
-            if (!services.Any(c => c.ServiceType == typeof(ObjectInstanceAccessor<T>)))
+            if (services.Any(c => c.ServiceType == typeof(ObjectInstanceAccessor<T>)))
             {
                 throw new Exception($"The instance of {instance.GetType().AssemblyQualifiedName} is registered.");
             }
