@@ -5,10 +5,10 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Fra
 {
-    public abstract class FraApplicationBase : IFraApplication
+    public abstract class ApplicationBase : IApplication
     {
 
-        protected FraApplicationBase(Type appEntryModuleType, IServiceCollection services, Action<FraApplicationCreationOptions> optionsAction)
+        protected ApplicationBase(Type appEntryModuleType, IServiceCollection services, Action<ApplicationCreationOptions> optionsAction)
         {
             appEntryModuleType.CheckNotNull(nameof(appEntryModuleType));
             appEntryModuleType.CheckEntryModuleType();
@@ -16,9 +16,9 @@ namespace Fra
 
             EntryModuleType = appEntryModuleType;
             Services = services;
-            var options = new FraApplicationCreationOptions(services);
+            var options = new ApplicationCreationOptions(services);
             optionsAction?.Invoke(options);
-            services.AddSingleton<IFraApplication>(this);
+            services.AddSingleton<IApplication>(this);
             services.AddSingleton<IModuleContainer>(this);
             services.AddCoreServices();
             services.AddCoreFraServices(this, options);
@@ -32,9 +32,9 @@ namespace Fra
 
         public IServiceProvider ServiceProvider { get; }
 
-        public IReadOnlyCollection<FraModuleDescriptor> Modules { get; }
+        public IReadOnlyCollection<AppModuleDescriptor> Modules { get; }
 
-        protected virtual IReadOnlyCollection<FraModuleDescriptor> LoadModules(IServiceCollection services, FraApplicationCreationOptions options)
+        protected virtual IReadOnlyCollection<AppModuleDescriptor> LoadModules(IServiceCollection services, ApplicationCreationOptions options)
         {
             return services.GetSingleInstance<ModuleLoader>().LoadModules(services, EntryModuleType);
         }
@@ -46,7 +46,7 @@ namespace Fra
 
             foreach (var module in Modules)
             {
-                if (module.Instance is FraModule fraModule)
+                if (module.Instance is AppModule fraModule)
                 {
                     fraModule.ServiceConfigurationContext = context;
                 }
@@ -58,7 +58,7 @@ namespace Fra
 
             foreach (var module in Modules)
             {
-                if (module.Instance is FraModule fraModule)
+                if (module.Instance is AppModule fraModule)
                 {
                     fraModule.ServiceConfigurationContext = null;
                 }
@@ -76,7 +76,7 @@ namespace Fra
             }
             catch (Exception ex)
             {
-                throw new FraException($"An error occurred during {nameof(IFraModule.PreConfigureServices)}. See the inner exception for details.", ex);
+                throw new FraException($"An error occurred during {nameof(IAppModule.PreConfigureServices)}. See the inner exception for details.", ex);
             }
         }
 
@@ -91,7 +91,7 @@ namespace Fra
             }
             catch (Exception ex)
             {
-                throw new FraException($"An error occurred during {nameof(IFraModule.ConfigureServices)}. See the inner exception for details.", ex);
+                throw new FraException($"An error occurred during {nameof(IAppModule.ConfigureServices)}. See the inner exception for details.", ex);
             }
         }
 
@@ -106,7 +106,7 @@ namespace Fra
             }
             catch (Exception ex)
             {
-                throw new FraException($"An error occurred during {nameof(IFraModule.PostConfigureServices)}. See the inner exception for details.", ex);
+                throw new FraException($"An error occurred during {nameof(IAppModule.PostConfigureServices)}. See the inner exception for details.", ex);
             }
         }
 

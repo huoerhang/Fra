@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Fra.Modularity
 {
-    public abstract class FraModule : IFraModule
+    public abstract class AppModule : IAppModule
     {
         private ServiceConfigurationContext _serviceConfigurationContext;
 

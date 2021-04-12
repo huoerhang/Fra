@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Fra
 {
-    internal class InternalFraApplication
+    internal class InternalApplication
     {
         private readonly IServiceProvider _serviceProvider;
 

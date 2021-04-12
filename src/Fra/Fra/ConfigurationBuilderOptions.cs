@@ -1,6 +1,6 @@
 ﻿namespace Fra
 {
-    public class FraConfigurationBuilderOptions
+    public class ConfigurationBuilderOptions
     {
         public string EnvironmentName { get; set; }
 

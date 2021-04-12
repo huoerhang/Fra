@@ -17,11 +17,11 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddLogging();
         }
 
-        internal static void AddCoreFraServices(this IServiceCollection services,IFraApplication fraApplication,FraApplicationCreationOptions fraApplicationCreationOptions)
+        internal static void AddCoreFraServices(this IServiceCollection services,IApplication fraApplication,ApplicationCreationOptions fraApplicationCreationOptions)
         {
             var moduleLoader = new ModuleLoader();
             services.TryAddSingleton(moduleLoader);
-            services.AddAssemblyOf<IFraApplication>();
+            services.AddAssemblyOf<IApplication>();
         }
     }
 }

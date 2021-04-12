@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Fra
 {
-    public interface IFraApplication : IModuleContainer, IDisposable
+    public interface IApplication : IModuleContainer, IDisposable
     {
         Type EntryModuleType { get; }
 

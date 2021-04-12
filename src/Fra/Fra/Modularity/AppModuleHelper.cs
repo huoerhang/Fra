@@ -5,7 +5,7 @@ using System.Reflection;
 
 namespace Fra.Modularity
 {
-    internal static class FraModuleHelper
+    internal static class AppModuleHelper
     {
         public static List<Type> FindDependedModuleTypes(Type moduleType)
         {

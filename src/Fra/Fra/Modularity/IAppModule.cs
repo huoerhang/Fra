@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Fra.Modularity
 {
-    public interface IFraModule
+    public interface IAppModule
     {
         void PreConfigureServices(ServiceConfigurationContext context);
 
