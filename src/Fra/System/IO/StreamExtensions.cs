@@ -9,7 +9,7 @@ namespace System.IO
 {
     public static class StreamExtensions
     {
-        public static Span<byte[]> GetAllBytes(this Stream stream)
+        public static byte[] GetAllBytes(this Stream stream)
         {
             using (var memoryStream = new MemoryStream())
             {
