@@ -18,6 +18,8 @@ namespace Fra.Tests.Fra.DependencyInjection
             IServiceProvider serviceProvider = services.BuildServiceProvider();
             var cat= serviceProvider.GetService<ICat>();
             cat.Eat();
+            var dog = serviceProvider.GetService<IDog>();
+            dog.Eat();
         }
     }
 }
