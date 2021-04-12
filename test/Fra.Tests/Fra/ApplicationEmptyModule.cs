@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Fra.Modularity;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Fra.Tests.Fra
 {
@@ -16,6 +17,7 @@ namespace Fra.Tests.Fra
 
         public override void ConfigureServices(ServiceConfigurationContext context)
         {
+            context.Services.AddAssemblyOf<ApplicationEmptyModule>();
             Console.WriteLine($"{nameof(ApplicationEmptyModule.ConfigureServices)}");
         }
 
