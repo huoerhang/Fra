@@ -7,7 +7,7 @@ using Xunit;
 using Fra;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Fra.Tests.Fra
+namespace Fra.Tests.DependencyInjection
 {
     public class Application_Tests
     {

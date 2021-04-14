@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Fra.Tests.Fra
+namespace Fra.Tests.DependencyInjection
 {
     public interface IDog
     {

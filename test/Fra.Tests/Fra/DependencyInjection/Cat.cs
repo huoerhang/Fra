@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Fra.DependencyInjection;
 
-namespace Fra.Tests.Fra
+namespace Fra.Tests.DependencyInjection
 {
     public interface ICat
     {

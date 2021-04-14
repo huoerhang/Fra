@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Fra.Modularity;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Fra.Tests.Fra
+namespace Fra.Tests.DependencyInjection
 {
     [DependsAttribute(typeof(DependenApplicationEmptyModule))]
     public class ApplicationEmptyModule : AppModule, IAppEntryModule

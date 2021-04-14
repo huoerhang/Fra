@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace Fra.Tests.Fra.DependencyInjection
+namespace Fra.Tests.DependencyInjection
 {
     public class DependencyInjectionTest
     {
