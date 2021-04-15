@@ -30,5 +30,15 @@ namespace System
 
             return source;
         }
+
+        public static bool IsDefaultValue<T>(this T? source)
+        {
+            if (!typeof(T).IsValueType || source == null)
+            {
+                return true;
+            }
+
+            return source.Equals(default(T));
+        }
     }
 }
