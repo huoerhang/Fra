@@ -9,7 +9,7 @@ namespace System
 {
     public static class StringExtensions
     {
-        public static bool IsNullOrEmpty(this string source, bool allowWhiteSpace = false)
+        public static bool IsNullOrEmpty(this string? source, bool allowWhiteSpace = false)
         {
             if (!allowWhiteSpace)
             {

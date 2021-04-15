@@ -62,7 +62,14 @@ namespace Fra.Modularity
 
         private IAppModule CreateAndRegisterModule(IServiceCollection services, Type moduleType)
         {
-            var module = (IAppModule)Activator.CreateInstance(moduleType);
+            var instance = Activator.CreateInstance(moduleType);
+
+            if (instance == null)
+            {
+                throw new FraException($"The instance of type {moduleType.AssemblyQualifiedName} can not create.");
+            }
+
+            var module = (IAppModule)instance;
             services.AddSingleton(moduleType, module);
 
             return module;

@@ -41,7 +41,7 @@ namespace System
             return types.ToArray();
         }
 
-        private static void AppendBaseTypes(List<Type> types, Type type, bool includeObject, Type stoppingType = null)
+        private static void AppendBaseTypes(List<Type> types, Type? type, bool includeObject, Type? stoppingType = null)
         {
             if (type == null || type == stoppingType)
             {

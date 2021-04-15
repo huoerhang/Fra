@@ -2,7 +2,7 @@
 {
     public static class MemberInfoExtensions
     {
-        public static TAttribute GetAttributeOfTypeOrBaseTypesOrNull<TAttribute>(this Type type, bool inherit = true)
+        public static TAttribute? GetAttributeOfTypeOrBaseTypesOrNull<TAttribute>(this Type type, bool inherit = true)
             where TAttribute:Attribute
         {
             var attribute = type.GetTypeInfo().GetCustomAttribute<TAttribute>(inherit);
@@ -12,12 +12,14 @@
                 return attribute;
             }
 
-            if (type.GetTypeInfo().BaseType == null)
+            var baseType = type.GetTypeInfo().BaseType;
+
+            if (baseType == null)
             {
                 return null;
             }
 
-            return type.GetTypeInfo().BaseType.GetAttributeOfTypeOrBaseTypesOrNull<TAttribute>(inherit);
+            return baseType.GetAttributeOfTypeOrBaseTypesOrNull<TAttribute>(inherit);
         }
     }
 }

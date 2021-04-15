@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -11,9 +12,9 @@ namespace Fra.Modularity
 {
     public abstract class AppModule : IAppModule
     {
-        private ServiceConfigurationContext _serviceConfigurationContext;
+        private ServiceConfigurationContext? _serviceConfigurationContext;
 
-        protected internal ServiceConfigurationContext ServiceConfigurationContext
+        protected internal ServiceConfigurationContext? ServiceConfigurationContext
         {
             get
             {
@@ -42,9 +43,11 @@ namespace Fra.Modularity
 
         }
 
+#pragma warning disable CS8602 // 解引用可能出现空引用。
         protected void Configure<TOptions>(Action<TOptions> configureAction)
             where TOptions : class
         {
+
             ServiceConfigurationContext.Services.Configure(configureAction);
         }
 
@@ -65,5 +68,7 @@ namespace Fra.Modularity
         {
             ServiceConfigurationContext.Services.Configure<TOptions>(configuration, configureBinder);
         }
+
+#pragma warning restore CS8602 // 解引用可能出现空引用。
     }
 }

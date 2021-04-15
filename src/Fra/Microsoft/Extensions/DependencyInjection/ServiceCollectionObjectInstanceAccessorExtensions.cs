@@ -7,6 +7,7 @@ namespace Microsoft.Extensions.DependencyInjection
     public static class ServiceCollectionObjectInstanceAccessorExtensions
     {
         public static IServiceCollection AddObjectInstance<T>(this IServiceCollection services, T instance)
+            where T : notnull
         {
             if (services.Any(c => c.ServiceType == typeof(ObjectInstanceAccessor<T>)))
             {
@@ -19,6 +20,7 @@ namespace Microsoft.Extensions.DependencyInjection
         }
 
         public static IServiceCollection TryAddObjectInstance<T>(this IServiceCollection services, T instance)
+            where T : notnull
         {
             if (!services.Any(c => c.ServiceType == typeof(ObjectInstanceAccessor<T>)))
             {
@@ -28,7 +30,7 @@ namespace Microsoft.Extensions.DependencyInjection
             return services;
         }
 
-        public static T GetObjectInstanceOrNull<T>(this IServiceCollection services)
+        public static T? GetObjectInstanceOrNull<T>(this IServiceCollection services)
             where T : class
         {
             return services.GetFirstInstanceOrNull<ObjectInstanceAccessor<T>>()?.Value;

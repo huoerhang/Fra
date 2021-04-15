@@ -24,12 +24,13 @@ namespace System.Collections.Generic
         /// <param name="getDependencies"></param>
         /// <param name="comparer"></param>
         /// <returns></returns>
-        public static List<T> SortByDependencies<T>(this IEnumerable<T> source, Func<T, IEnumerable<T>> getDependencies, IEqualityComparer<T> comparer = null)
+        public static List<T> SortByDependencies<T>(this IEnumerable<T> source, Func<T, IEnumerable<T>> getDependencies, IEqualityComparer<T>? comparer = null)
+            where T : notnull
         {
             List<T> sorted = new List<T>();
             Dictionary<T, bool> visited = new Dictionary<T, bool>(comparer);
 
-            foreach(var item in source)
+            foreach (var item in source)
             {
                 SortByDependenciesVisit(item, getDependencies, sorted, visited);
             }
@@ -38,6 +39,7 @@ namespace System.Collections.Generic
         }
 
         private static void SortByDependenciesVisit<T>(T item, Func<T, IEnumerable<T>> getDependencies, List<T> sorted, Dictionary<T, bool> visited)
+            where T : notnull
         {
             bool alreadyVisited = visited.TryGetValue(item, out bool inProcess);
 

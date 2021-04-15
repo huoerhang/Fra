@@ -6,7 +6,7 @@ namespace Fra.DependencyInjection
 {
     internal class DefaultServiceTypeProvider : BaseServiceTypeProvider, IServiceTypeProvider
     {
-        public override ServiceTypeDescriptor GetServiceTypeDescriptor(Type implementationType)
+        public override ServiceTypeDescriptor? GetServiceTypeDescriptor(Type implementationType)
         {
             var typeInfo = implementationType.GetTypeInfo();
             var attribute = typeInfo.GetCustomAttribute<DependencyAttribute>(true);

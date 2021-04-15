@@ -29,9 +29,16 @@ namespace Microsoft.Extensions.DependencyInjection
             }
         }
 
-        public static T GetFirstInstanceOrNull<T>(this IServiceCollection services)
+        public static T? GetFirstInstanceOrNull<T>(this IServiceCollection services)
         {
-            return (T)services.FirstOrDefault(c => c.ServiceType == typeof(T))?.ImplementationInstance;
+            var result = services.FirstOrDefault(c => c.ServiceType == typeof(T));
+
+            if (result == null || result.ImplementationInstance == null)
+            {
+                return default;
+            }
+
+            return (T)result.ImplementationInstance;
         }
 
         public static T GetSingleInstance<T>(this IServiceCollection services)
