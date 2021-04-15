@@ -27,7 +27,7 @@ namespace System.Collections.Generic
         public static List<T> SortByDependencies<T>(this IEnumerable<T> source, Func<T, IEnumerable<T>> getDependencies, IEqualityComparer<T> comparer = null)
         {
             List<T> sorted = new List<T>();
-            Dictionary<T, bool> visited = new Dictionary<T, bool>();
+            Dictionary<T, bool> visited = new Dictionary<T, bool>(comparer);
 
             foreach(var item in source)
             {

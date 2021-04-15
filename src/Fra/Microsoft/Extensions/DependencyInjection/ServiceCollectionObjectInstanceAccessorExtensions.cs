@@ -13,6 +13,8 @@ namespace Microsoft.Extensions.DependencyInjection
                 throw new Exception($"The instance of {instance.GetType().AssemblyQualifiedName} is registered.");
             }
 
+            services.Insert(0, new ServiceDescriptor(typeof(ObjectInstanceAccessor<T>), new ObjectInstanceAccessor<T>(instance)));
+
             return services;
         }
 
