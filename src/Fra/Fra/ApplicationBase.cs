@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using Fra.Modularity;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace Fra
 {
@@ -68,6 +69,31 @@ namespace Fra
             }
         }
 
+        protected virtual void InitializeModules()
+        {
+            using (var scope = ServiceProvider.CreateScope())
+            {
+                var context = new ApplicationInitializationContext(scope.ServiceProvider);
+                scope.ServiceProvider.GetRequiredService<IModuleManager>().InitializeModules(context);
+            }
+        }
+
+        public abstract void Initialize();
+
+        public virtual void ShutDown()
+        {
+            using (var scope = ServiceProvider.CreateScope())
+            {
+                var context = new ApplicationShutdownContext(scope.ServiceProvider);
+                scope.ServiceProvider.GetRequiredService<IModuleManager>().ShutdownModules(context);
+            }
+            //throw new NotImplementedException();
+        }
+
+        public virtual void Dispose()
+        {
+        }
+
         private void ExecutePreConfigureServices(ServiceConfigurationContext context)
         {
             try
@@ -111,19 +137,6 @@ namespace Fra
             {
                 throw new FraException($"An error occurred during {nameof(IAppModule.PostConfigureServices)}. See the inner exception for details.", ex);
             }
-        }
-
-        public virtual void Initialize()
-        {
-        }
-
-        public virtual void ShutDown()
-        {
-            //throw new NotImplementedException();
-        }
-
-        public virtual void Dispose()
-        {
         }
     }
 }

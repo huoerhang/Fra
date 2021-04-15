@@ -19,6 +19,7 @@ namespace Fra.Tests.Guids
             IServiceProvider serviceProvider = services.BuildServiceProvider();
             var guidProvider = serviceProvider.GetService<IGuidProvider>();
             var guid = guidProvider.Create();
+            var myServiceProvider = serviceProvider.GetService<IServiceProvider>();
         }
     }
 }

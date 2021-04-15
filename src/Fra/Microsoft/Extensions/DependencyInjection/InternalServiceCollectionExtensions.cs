@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Fra;
 using Fra.Modularity;
+using Fra.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Microsoft.Extensions.DependencyInjection
@@ -21,6 +22,7 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             var moduleLoader = new ModuleLoader();
             services.TryAddSingleton(moduleLoader);
+            services.TryAddObjectAccessor<ObjectAccessor<IServiceProvider>>();
             services.AddAssemblyOf<IApplication>();
         }
     }

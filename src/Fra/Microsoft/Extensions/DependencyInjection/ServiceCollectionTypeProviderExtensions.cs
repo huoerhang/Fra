@@ -77,7 +77,7 @@ namespace Microsoft.Extensions.DependencyInjection
 
         private static ServiceTypeProviderContainer GetOrCreateServiceTypeProviders(this IServiceCollection services)
         {
-            var container = services.GetFirstInstanceOrNull<ObjectInstanceAccessor<ServiceTypeProviderContainer>>()?.Value;
+            var container = services.GetFirstInstanceOrNull<ObjectAccessor<ServiceTypeProviderContainer>>()?.Value;
 
             if (container == null)
             {
@@ -85,7 +85,7 @@ namespace Microsoft.Extensions.DependencyInjection
                 {
                    new DefaultServiceTypeProvider()
                 };
-                services.AddObjectInstance(container);
+                services.AddObjectAccessor(new ObjectAccessor<ServiceTypeProviderContainer>(container));
             }
 
             return container;

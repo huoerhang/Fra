@@ -1,10 +1,6 @@
 ﻿using Fra.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Fra
 {
@@ -18,13 +14,12 @@ namespace Fra
 
         public override void Initialize()
         {
-
             if (ServiceProvider == null)
             {
                 throw new FraException($"The ServiceProvider is null.");
             }
 
-            var serviceProvider = ServiceProvider.GetRequiredService<ObjectInstanceAccessor<IServiceProvider>>();
+            var serviceProvider = ServiceProvider.GetRequiredService<ObjectAccessor<IServiceProvider>>();
 
             if (serviceProvider == null)
             {
@@ -32,6 +27,7 @@ namespace Fra
             }
 
             ServiceProvider = serviceProvider.Value;
+            InitializeModules();
         }
 
         public override void Dispose()
