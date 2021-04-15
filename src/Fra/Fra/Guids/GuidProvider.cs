@@ -7,24 +7,23 @@ namespace Fra.Guids
     [Dependency]
     public class GuidProvider : IGuidProvider
     {
-        public SequentialGuidGeneratorOptions? Options { get; }
+        public IGuidGenerator GuidGenerator { get; }
 
         public GuidProvider(IOptions<SequentialGuidGeneratorOptions> options)
         {
             if (options != null)
             {
-                Options = options.Value;
+                GuidGenerator = new SequentialGuidGenerator(options.Value);
+
+                return;
             }
+
+            GuidGenerator = SimpleGuidGenerator.Instance;
         }
 
         public Guid Create()
         {
-            if (Options == null)
-            {
-                return SimpleGuidGenerator.Instance.Create();
-            }
-
-            return new SequentialGuidGenerator(Options).Create();
+            return GuidGenerator.Create();
         }
     }
 }
