@@ -2,13 +2,11 @@
 
 namespace Fra
 {
-    public class ApplicationInitializationContext
+    public class ApplicationInitializationContext: ApplicationLifecycleContenxt
     {
-        public IServiceProvider ServiceProvider { get; set; }
-
         public ApplicationInitializationContext(IServiceProvider serviceProvider)
+            :base(serviceProvider)
         {
-            ServiceProvider = serviceProvider;
         }
     }
 }

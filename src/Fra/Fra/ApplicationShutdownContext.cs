@@ -2,13 +2,10 @@
 
 namespace Fra
 {
-    public class ApplicationShutdownContext
+    public class ApplicationShutdownContext : ApplicationLifecycleContenxt
     {
-        public IServiceProvider ServiceProvider { get; }
-
-        public ApplicationShutdownContext(IServiceProvider serviceProvider)
+        public ApplicationShutdownContext(IServiceProvider serviceProvider) : base(serviceProvider)
         {
-            ServiceProvider = serviceProvider;
         }
     }
 }
