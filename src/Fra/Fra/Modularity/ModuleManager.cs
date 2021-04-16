@@ -67,41 +67,45 @@ namespace Fra.Modularity
 
         private void ExecutePreApplicationInitialization(ApplicationInitializationContext context)
         {
-            if (_preInitializationModules == null)
+            ExecuteInitialization(_preInitializationModules, modules =>
             {
-                return;
-            }
-
-            foreach (var item in _preInitializationModules)
-            {
-                item.OnPreApplicationInitialization(context);
-            }
+                foreach (var item in modules)
+                {
+                    item.OnPreApplicationInitialization(context);
+                }
+            });
         }
 
         private void ExecuteApplicationInitialization(ApplicationInitializationContext context)
         {
-            if (_initializationModules == null)
+            ExecuteInitialization(_initializationModules, modules =>
             {
-                return;
-            }
-
-            foreach (var item in _initializationModules)
-            {
-                item.OnApplicationInitialization(context);
-            }
+                foreach (var item in modules)
+                {
+                    item.OnApplicationInitialization(context);
+                }
+            });
         }
 
         private void ExecutePostApplicationInitialization(ApplicationInitializationContext context)
         {
-            if (_postInitializationModules == null)
+            ExecuteInitialization(_postInitializationModules, modules =>
+             {
+                 foreach (var item in modules)
+                 {
+                     item.OnPostApplicationInitialization(context);
+                 }
+             });
+        }
+
+        private void ExecuteInitialization<T>(IReadOnlyCollection<T>? modules, Action<IReadOnlyCollection<T>> action)
+        {
+            if (modules == null)
             {
                 return;
             }
 
-            foreach (var item in _postInitializationModules)
-            {
-                item.OnPostApplicationInitialization(context);
-            }
+            action(modules);
         }
 
         private void FillLifecycleModules()
