@@ -1,0 +1,73 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Fra.Ddd.Domain
+{
+    public static class EntityExtensions
+    {
+        public static bool EntityEquals(this IEntity self, IEntity other)
+        {
+            if (self == null || other == null)
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(self, other))
+            {
+                return true;
+            }
+
+            var selfType = self.GetType();
+            var otherType = other.GetType();
+
+            if (!selfType.IsAssignableTo(otherType) && !otherType.IsAssignableTo(selfType))
+            {
+                return false;
+            }
+
+            var selfKeys = self.GetKeys();
+            var otherKeys = other.GetKeys();
+
+            if (selfKeys.Length != otherKeys.Length)
+            {
+                return false;
+            }
+
+            for (var i = 0; i < selfKeys.Length; i++)
+            {
+                var selfKey = selfKeys[i];
+                var otherKey = otherKeys[i];
+
+                if (selfKey == null)
+                {
+                    if (otherKey == null)
+                    {
+                        continue;
+                    }
+
+                    return false;
+                }
+
+                if (otherKey == null)
+                {
+                    return false;
+                }
+
+                if (self.IsDefaultValue() && otherKeys.IsDefaultValue())
+                {
+                    return false;
+                }
+
+                if (!selfKey.Equals(otherKey))
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+    }
+}
