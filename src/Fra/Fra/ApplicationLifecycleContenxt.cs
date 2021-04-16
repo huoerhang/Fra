@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Fra
 {
@@ -9,6 +10,17 @@ namespace Fra
         public ApplicationLifecycleContenxt(IServiceProvider serviceProvider)
         {
             ServiceProvider = serviceProvider;
+        }
+
+        public T? GetService<T>()
+        {
+            return ServiceProvider.GetService<T>();
+        }
+
+        public T GetRequiredService<T>()
+            where T : notnull
+        {
+            return ServiceProvider.GetRequiredService<T>();
         }
     }
 }
