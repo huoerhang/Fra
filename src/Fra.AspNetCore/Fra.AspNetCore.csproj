@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <RootNamespace></RootNamespace>
-    <Version>0.0.4</Version>
+    <Version>0.0.5</Version>
     <Authors>huohaihang</Authors>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageProjectUrl>https://github.com/huoerhang/fra</PackageProjectUrl>

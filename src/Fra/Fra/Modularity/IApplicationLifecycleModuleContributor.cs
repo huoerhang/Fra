@@ -1,12 +1,12 @@
 ﻿namespace Fra.Modularity
 {
-    public interface IApplicationLifecycleModuleContributor
+    public interface IApplicationLifecycleModuleContributor :
+        IApplicationPreInitializationModuleContributor,
+        IApplicationInitializationModuleContributor,
+        IApplicationPostInitializationModuleContributor,
+        IApplicationShutdownModuleContributor
     {
-        void OnPreApplicationInitialization(ApplicationInitializationContext context);
-        void OnApplicationInitialization(ApplicationInitializationContext context);
 
-        void OnPostApplicationInitialization(ApplicationInitializationContext context);
 
-        void OnApplicationShutdown(ApplicationShutdownContext context);
     }
 }

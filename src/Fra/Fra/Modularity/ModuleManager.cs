@@ -13,24 +13,22 @@ namespace Fra.Modularity
     {
         private readonly IModuleContainer _moduleContainer;
         private readonly ILogger<ModuleManager> _logger;
-        private readonly IReadOnlyCollection<AppModuleDescriptor> _moduleDescriptors;// _lifecycleModules; //= new List<AppModuleDescriptor>();
-        private IReadOnlyCollection<IApplicationLifecycleModuleContributor> _lifecycleModules;
+        private readonly IReadOnlyCollection<AppModuleDescriptor> _moduleDescriptors;
+        private IReadOnlyCollection<IApplicationPreInitializationModuleContributor>? _preInitializationModules;
+        private IReadOnlyCollection<IApplicationInitializationModuleContributor>? _initializationModules;
+        private IReadOnlyCollection<IApplicationPostInitializationModuleContributor>? _postInitializationModules;
+        private IReadOnlyCollection<IApplicationShutdownModuleContributor>? _shutDownModules;
 
         public ModuleManager(IModuleContainer moduleContainer, ILogger<ModuleManager> logger)
         {
             _moduleContainer = moduleContainer;
             _logger = logger;
             _moduleDescriptors = moduleContainer.Modules;
-            _lifecycleModules = LifecycleModulesFilter(moduleContainer.Modules);
+            FillLifecycleModules();
         }
 
         public void InitializeModules(ApplicationInitializationContext context)
         {
-            if (_lifecycleModules == null)
-            {
-                return;
-            }
-
             try
             {
                 ExecutePreApplicationInitialization(context);
@@ -47,7 +45,12 @@ namespace Fra.Modularity
 
         public void ShutdownModules(ApplicationShutdownContext context)
         {
-            var reverseDescriptors = _lifecycleModules.Reverse().ToList();
+            if (_shutDownModules == null)
+            {
+                return;
+            }
+
+            var reverseDescriptors = _shutDownModules.Reverse().ToList();
 
             try
             {
@@ -64,7 +67,12 @@ namespace Fra.Modularity
 
         private void ExecutePreApplicationInitialization(ApplicationInitializationContext context)
         {
-            foreach (var item in _lifecycleModules)
+            if (_preInitializationModules == null)
+            {
+                return;
+            }
+
+            foreach (var item in _preInitializationModules)
             {
                 item.OnPreApplicationInitialization(context);
             }
@@ -72,7 +80,12 @@ namespace Fra.Modularity
 
         private void ExecuteApplicationInitialization(ApplicationInitializationContext context)
         {
-            foreach (var item in _lifecycleModules)
+            if (_initializationModules == null)
+            {
+                return;
+            }
+
+            foreach (var item in _initializationModules)
             {
                 item.OnApplicationInitialization(context);
             }
@@ -80,16 +93,29 @@ namespace Fra.Modularity
 
         private void ExecutePostApplicationInitialization(ApplicationInitializationContext context)
         {
-            foreach (var item in _lifecycleModules)
+            if (_postInitializationModules == null)
+            {
+                return;
+            }
+
+            foreach (var item in _postInitializationModules)
             {
                 item.OnPostApplicationInitialization(context);
             }
         }
 
-        private IReadOnlyCollection<IApplicationLifecycleModuleContributor> LifecycleModulesFilter(IEnumerable<AppModuleDescriptor> modules)
+        private void FillLifecycleModules()
         {
-            return modules.Where(c => c.ModuleType.IsAssignableTo<IApplicationLifecycleModuleContributor>())
-                 .Cast<IApplicationLifecycleModuleContributor>().ToImmutableList();
+            _preInitializationModules = LifecycleModulesFilter<IApplicationPreInitializationModuleContributor>();
+            _initializationModules = LifecycleModulesFilter<IApplicationInitializationModuleContributor>();
+            _postInitializationModules = LifecycleModulesFilter<IApplicationPostInitializationModuleContributor>();
+            _shutDownModules = LifecycleModulesFilter<IApplicationShutdownModuleContributor>();
+        }
+
+        private IReadOnlyCollection<T> LifecycleModulesFilter<T>()
+        {
+            return _moduleDescriptors.Where(c => c.ModuleType.IsAssignableTo<T>())
+                 .Cast<T>().ToImmutableList();
         }
     }
 }
