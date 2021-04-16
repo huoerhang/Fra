@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using Fra.DependencyInjection;
 using Fra.Modularity;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -35,6 +36,17 @@ namespace Fra
         public IServiceProvider ServiceProvider { get; protected set; }
 
         public IReadOnlyCollection<AppModuleDescriptor> Modules { get; }
+
+
+        public virtual void SetServiceProvider(IServiceProvider serviceProvider)
+        {
+            if (serviceProvider == null)
+            {
+                throw new ArgumentNullException(nameof(serviceProvider));
+            }
+
+            ServiceProvider = serviceProvider;
+        }
 
         protected virtual IReadOnlyCollection<AppModuleDescriptor> LoadModules(IServiceCollection services, ApplicationCreationOptions options)
         {

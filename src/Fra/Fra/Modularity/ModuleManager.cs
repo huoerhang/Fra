@@ -118,7 +118,7 @@ namespace Fra.Modularity
 
         private IReadOnlyCollection<T> LifecycleModulesFilter<T>()
         {
-            return _moduleDescriptors.Where(c => c.ModuleType.IsAssignableTo<T>())
+            return _moduleDescriptors.Where(c => c.ModuleType.IsAssignableTo<T>()).Select(c=>c.Instance)
                  .Cast<T>().ToImmutableList();
         }
     }

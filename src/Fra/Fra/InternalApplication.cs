@@ -19,14 +19,6 @@ namespace Fra
                 throw new FraException($"The ServiceProvider is null.");
             }
 
-            var serviceProvider = ServiceProvider.GetRequiredService<ObjectAccessor<IServiceProvider>>();
-
-            if (serviceProvider == null)
-            {
-                throw new FraException($"The {nameof(IServiceProvider)} is null.");
-            }
-
-            ServiceProvider = serviceProvider.Value;
             InitializeModules();
         }
 
