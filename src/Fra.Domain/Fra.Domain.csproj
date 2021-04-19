@@ -6,4 +6,8 @@
     <ProjectReference Include="..\Fra\Fra.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Microsoft\DependencyInjection\" />
+  </ItemGroup>
+
 </Project>
