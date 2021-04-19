@@ -10,7 +10,7 @@ namespace Fra.Domain.Entities
     {
         public bool EntityEquals(IEntity self, IEntity other)
         {
-
+            return false;
         }
     }
 }
