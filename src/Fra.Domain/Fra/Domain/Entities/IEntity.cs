@@ -1,4 +1,4 @@
-﻿namespace Fra.Ddd.Domain
+﻿namespace Fra.Domain.Entities
 {
     public interface IEntity
     {

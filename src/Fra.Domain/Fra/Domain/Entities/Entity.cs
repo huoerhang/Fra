@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 
-namespace Fra.Ddd.Domain
+namespace Fra.Domain.Entities
 {
     [Serializable]
     public abstract class Entity : IEntity

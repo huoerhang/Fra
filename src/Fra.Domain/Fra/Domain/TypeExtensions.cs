@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Fra.Domain.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Fra.Ddd.Domain
+namespace Fra.Domain
 {
     public static class TypeExtensions
     {

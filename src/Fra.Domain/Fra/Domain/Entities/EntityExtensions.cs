@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Fra.Ddd.Domain
+namespace Fra.Domain.Entities
 {
     public static class EntityExtensions
     {
