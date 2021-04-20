@@ -3,11 +3,15 @@
   <Import Project="..\common.props" />
 
   <ItemGroup>
+    <Compile Remove="Fra\Domain\Services\IDomainService.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Fra\Fra.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Microsoft\DependencyInjection\" />
+    <None Include="Fra\Domain\Services\IDomainService.cs" />
   </ItemGroup>
 
 </Project>

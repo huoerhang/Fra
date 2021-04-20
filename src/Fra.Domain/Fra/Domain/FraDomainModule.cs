@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Fra.Modularity;
 using Fra.Domain.Entities;
+using Fra.DependencyInjection;
 
 namespace Fra.Domain
 {
@@ -13,7 +14,7 @@ namespace Fra.Domain
     {
         public override void ConfigureServices(ServiceConfigurationContext context)
         {
-            context.Services.AddSingleton<IEntityEqualizerContainer, EntityEqualizerContainer>();
+            context.Services.AddObjectAccessor<EntityEqualizerContainer>(new ObjectAccessor<EntityEqualizerContainer>());
         }
     }
 }

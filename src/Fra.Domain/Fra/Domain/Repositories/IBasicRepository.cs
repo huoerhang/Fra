@@ -23,7 +23,7 @@ namespace Fra.Domain.Repositories
     public interface IBasicRepository<TEntity, TKey> : IBasicRepository<TEntity>, IReadOnlyRepository<TEntity, TKey>
         where TEntity : class, IAggregateRoot<TKey>
     {
-        Task<bool> DeleteAsync(TKey id, bool autoSave = false, CancellationToken cancellationToken = default);
+        Task DeleteAsync(TKey id, bool autoSave = false, CancellationToken cancellationToken = default);
 
         Task DeleteManyAsync(IEnumerable<TKey> ids, bool autoSave = false, CancellationToken cancellationToken = default);
     }

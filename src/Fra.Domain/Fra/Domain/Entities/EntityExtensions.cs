@@ -28,6 +28,18 @@ namespace Fra.Domain.Entities
                 return false;
             }
 
+            var equalizeResult = EntityEqualizerContainer.Instance.EntityEquals(self, other);
+
+            if (equalizeResult)
+            {
+                return true;
+            }
+
+            if (self.HasDefaultKey() && other.HasDefaultKey())
+            {
+                return false;
+            }
+
             var selfKeys = self.GetKeys();
             var otherKeys = other.GetKeys();
 
@@ -56,12 +68,27 @@ namespace Fra.Domain.Entities
                     return false;
                 }
 
-                if (self.IsDefaultValue() && otherKeys.IsDefaultValue())
+                if (selfKey.IsDefaultValue() && otherKey.IsDefaultValue())
                 {
                     return false;
                 }
 
                 if (!selfKey.Equals(otherKey))
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        public static bool HasDefaultKey(this IEntity entity)
+        {
+            entity.CheckNotNull(nameof(entity));
+
+            foreach (var key in entity.GetKeys())
+            {
+                if (!key.IsDefaultValue())
                 {
                     return false;
                 }
