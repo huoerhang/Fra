@@ -19,7 +19,7 @@ namespace Fra.DependencyInjection
 
             List<Type> serviceTypes = null;
 
-            if (attribute.SpecifyServices.IsNullOrEmpty())
+            if (!attribute.SpecifyServices.IsNullOrEmpty())
             {
                 serviceTypes = attribute.SpecifyServices.ToList();
             }
