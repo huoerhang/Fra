@@ -29,7 +29,7 @@ namespace Microsoft.Extensions.DependencyInjection
             }
         }
 
-        public static T? GetFirstInstanceOrNull<T>(this IServiceCollection services)
+        public static T GetFirstInstanceOrNull<T>(this IServiceCollection services)
         {
             var result = services.FirstOrDefault(c => c.ServiceType == typeof(T));
 

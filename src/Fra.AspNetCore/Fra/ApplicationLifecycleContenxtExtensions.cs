@@ -21,7 +21,7 @@ namespace Fra
             return appBuilder;
         }
 
-        public static IWebHostEnvironment? GetEnvironment(this ApplicationLifecycleContenxt context)
+        public static IWebHostEnvironment GetEnvironment(this ApplicationLifecycleContenxt context)
         {
             return context.ServiceProvider.GetService<IWebHostEnvironment>();
         }

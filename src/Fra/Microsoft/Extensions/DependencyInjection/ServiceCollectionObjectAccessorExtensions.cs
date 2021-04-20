@@ -43,7 +43,7 @@ namespace Microsoft.Extensions.DependencyInjection
             return services.AddObjectAccessor<T>(new ObjectAccessor<T>(instance));
         }
 
-        public static T? GetObjectAccessorOrNull<T>(this IServiceCollection services)
+        public static T GetObjectAccessorOrNull<T>(this IServiceCollection services)
             where T : class
         {
             return services.GetFirstInstanceOrNull<ObjectAccessor<T>>()?.Value;

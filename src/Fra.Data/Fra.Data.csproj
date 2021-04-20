@@ -3,5 +3,9 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
-  <Import Project="..\common.props"/>
+  <Import Project="..\common.props" />
+  <ItemGroup>
+    <ProjectReference Include="..\Fra.Domain\Fra.Domain.csproj" />
+    <ProjectReference Include="..\Fra\Fra.csproj" />
+  </ItemGroup>
 </Project>

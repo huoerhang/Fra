@@ -6,7 +6,7 @@ namespace Fra
 {
     internal class InternalApplication : ApplicationBase
     {
-        public InternalApplication(Type appEntryModuleType, IServiceCollection services, Action<ApplicationCreationOptions>? optionsAction)
+        public InternalApplication(Type appEntryModuleType, IServiceCollection services, Action<ApplicationCreationOptions> optionsAction)
             : base(appEntryModuleType, services, optionsAction)
         {
 

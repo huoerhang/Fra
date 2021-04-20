@@ -2,7 +2,7 @@
 {
     public static class MemberInfoExtensions
     {
-        public static TAttribute? GetAttributeOfTypeOrBaseTypesOrNull<TAttribute>(this Type type, bool inherit = true)
+        public static TAttribute GetAttributeOfTypeOrBaseTypesOrNull<TAttribute>(this Type type, bool inherit = true)
             where TAttribute:Attribute
         {
             var attribute = type.GetTypeInfo().GetCustomAttribute<TAttribute>(inherit);

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
@@ -6,7 +7,7 @@ namespace Fra.DependencyInjection
 {
     internal class DefaultServiceTypeProvider : BaseServiceTypeProvider, IServiceTypeProvider
     {
-        public override ServiceTypeDescriptor? GetServiceTypeDescriptor(Type implementationType)
+        public override ServiceTypeDescriptor GetServiceTypeDescriptor(Type implementationType)
         {
             var typeInfo = implementationType.GetTypeInfo();
             var attribute = typeInfo.GetCustomAttribute<DependencyAttribute>(true);
@@ -16,12 +17,32 @@ namespace Fra.DependencyInjection
                 return null;
             }
 
-            var serviceTypes = typeInfo.GetInterfaces().ToList();
+            List<Type> serviceTypes = null;
+
+            if (attribute.SpecifyServices.IsNullOrEmpty())
+            {
+                serviceTypes = attribute.SpecifyServices.ToList();
+            }
+            else
+            {
+                serviceTypes = typeInfo.GetInterfaces().ToList();
+            }
+
             var lifetime = attribute.Lifetime;
 
-            if (attribute.IncludeSelf)
+            if (attribute.IncludeSelf || serviceTypes.IsNullOrEmpty())
             {
+                if (serviceTypes == null)
+                {
+                    serviceTypes = new List<Type>();
+                }
+
                 serviceTypes.Add(implementationType);
+            }
+
+            if (serviceTypes.IsNullOrEmpty())
+            {
+                return null;
             }
 
             return new ServiceTypeDescriptor(serviceTypes, implementationType, lifetime);

@@ -1,4 +1,5 @@
 ﻿using Fra.Domain.Entities;
+using Fra.Domain.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +7,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Fra.Domain.Repositories
+namespace Fra.Data.Repositories
 {
     public abstract class BasicRepositoryBase<TEntity> : IBasicRepository<TEntity>
         where TEntity : class, IAggregateRoot

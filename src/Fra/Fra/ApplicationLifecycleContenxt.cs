@@ -12,7 +12,7 @@ namespace Fra
             ServiceProvider = serviceProvider;
         }
 
-        public T? GetService<T>()
+        public T GetService<T>()
         {
             return ServiceProvider.GetService<T>();
         }

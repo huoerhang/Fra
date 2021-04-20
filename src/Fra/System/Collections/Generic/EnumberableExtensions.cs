@@ -24,7 +24,7 @@ namespace System.Collections.Generic
         /// <param name="getDependencies"></param>
         /// <param name="comparer"></param>
         /// <returns></returns>
-        public static List<T> SortByDependencies<T>(this IEnumerable<T> source, Func<T, IEnumerable<T>> getDependencies, IEqualityComparer<T>? comparer = null)
+        public static List<T> SortByDependencies<T>(this IEnumerable<T> source, Func<T, IEnumerable<T>> getDependencies, IEqualityComparer<T> comparer = null)
             where T : notnull
         {
             List<T> sorted = new List<T>();

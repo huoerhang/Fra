@@ -1,4 +1,5 @@
 ﻿using Fra.Domain.Entities;
+using Fra.Domain.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +7,7 @@ using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Fra.Domain.Repositories
+namespace Fra.Data.Repositories
 {
     public abstract class RepositoryBase<TEntity> : BasicRepositoryBase<TEntity>, IRepository<TEntity>
           where TEntity : class, IAggregateRoot
@@ -30,7 +31,7 @@ namespace Fra.Domain.Repositories
         public abstract Task DeleteAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default);
     }
 
-    public abstract class RepositoryBase<TEntity,TKey>:RepositoryBase<TEntity>,IRepository<TEntity,TKey>
+    public abstract class RepositoryBase<TEntity, TKey> : RepositoryBase<TEntity>, IRepository<TEntity, TKey>
         where TEntity : class, IAggregateRoot<TKey>
     {
         public abstract Task<TEntity> GetAsync(TKey id, CancellationToken cancellationToken = default);
@@ -51,7 +52,7 @@ namespace Fra.Domain.Repositories
 
         public virtual async Task DeleteManyAsync(IEnumerable<TKey> ids, bool autoSave = false, CancellationToken cancellationToken = default)
         {
-            foreach(var id in ids)
+            foreach (var id in ids)
             {
                 await DeleteAsync(id, autoSave, cancellationToken);
             }

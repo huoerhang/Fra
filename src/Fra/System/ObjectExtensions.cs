@@ -31,7 +31,7 @@ namespace System
             return source;
         }
 
-        public static bool IsDefaultValue<T>(this T? source)
+        public static bool IsDefaultValue<T>(this T source)
         {
             if (!typeof(T).IsValueType || source == null)
             {

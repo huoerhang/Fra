@@ -14,7 +14,7 @@ namespace Fra.Domain
     {
         public override void ConfigureServices(ServiceConfigurationContext context)
         {
-            context.Services.AddObjectAccessor<EntityEqualizerContainer>(new ObjectAccessor<EntityEqualizerContainer>());
+            context.Services.AddObjectAccessor(new ObjectAccessor<EntityEqualizerContainer>());
         }
     }
 }

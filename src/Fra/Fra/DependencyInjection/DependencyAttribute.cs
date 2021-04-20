@@ -22,6 +22,8 @@ namespace Fra.DependencyInjection
             _lifetime = lifetime;
         }
 
+        public Type[] SpecifyServices { get; set; }
+
         public bool IncludeSelf { get; set; } = false;
 
         public ServiceLifetime Lifetime

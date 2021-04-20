@@ -10,7 +10,7 @@ namespace Fra
 {
     public abstract class ApplicationBase : IApplication
     {
-        protected ApplicationBase(Type appEntryModuleType, IServiceCollection services, Action<ApplicationCreationOptions>? optionsAction)
+        protected ApplicationBase(Type appEntryModuleType, IServiceCollection services, Action<ApplicationCreationOptions> optionsAction)
         {
             appEntryModuleType.CheckNotNull(nameof(appEntryModuleType));
             appEntryModuleType.CheckEntryModuleType();
@@ -32,7 +32,6 @@ namespace Fra
 
         public IServiceCollection Services { get; }
 
-        [AllowNull]
         public IServiceProvider ServiceProvider { get; protected set; }
 
         public IReadOnlyCollection<AppModuleDescriptor> Modules { get; }

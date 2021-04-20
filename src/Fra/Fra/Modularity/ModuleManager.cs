@@ -14,10 +14,10 @@ namespace Fra.Modularity
         private readonly IModuleContainer _moduleContainer;
         private readonly ILogger<ModuleManager> _logger;
         private readonly IReadOnlyCollection<AppModuleDescriptor> _moduleDescriptors;
-        private IReadOnlyCollection<IApplicationPreInitializationModuleContributor>? _preInitializationModules;
-        private IReadOnlyCollection<IApplicationInitializationModuleContributor>? _initializationModules;
-        private IReadOnlyCollection<IApplicationPostInitializationModuleContributor>? _postInitializationModules;
-        private IReadOnlyCollection<IApplicationShutdownModuleContributor>? _shutDownModules;
+        private IReadOnlyCollection<IApplicationPreInitializationModuleContributor> _preInitializationModules;
+        private IReadOnlyCollection<IApplicationInitializationModuleContributor> _initializationModules;
+        private IReadOnlyCollection<IApplicationPostInitializationModuleContributor> _postInitializationModules;
+        private IReadOnlyCollection<IApplicationShutdownModuleContributor> _shutDownModules;
 
         public ModuleManager(IModuleContainer moduleContainer, ILogger<ModuleManager> logger)
         {
@@ -98,7 +98,7 @@ namespace Fra.Modularity
              });
         }
 
-        private void ExecuteInitialization<T>(IReadOnlyCollection<T>? modules, Action<IReadOnlyCollection<T>> action)
+        private void ExecuteInitialization<T>(IReadOnlyCollection<T> modules, Action<IReadOnlyCollection<T>> action)
         {
             if (modules == null)
             {
