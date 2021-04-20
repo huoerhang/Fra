@@ -15,18 +15,13 @@ namespace Fra.Data
         public static Task<string> ResolveAsync(this IConnectionStringResolver resolver, Type type)
         {
             var attribute = type.GetTypeInfo().GetCustomAttribute<ConnectionStringNameAttribute>();
-            string connectionStringName = null;
 
-            if (attribute == null)
+            if (attribute != null)
             {
-                connectionStringName = type.FullName;
-            }
-            else
-            {
-                connectionStringName = attribute.Name;
+                return resolver.ResolveAsync(attribute.Name);
             }
 
-            return resolver.ResolveAsync(connectionStringName);
+            return resolver.ResolveAsync(type.FullName);
         }
     }
 }
