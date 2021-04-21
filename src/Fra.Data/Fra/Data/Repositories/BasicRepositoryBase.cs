@@ -48,7 +48,7 @@ namespace Fra.Data.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<long> GetCountAsync(CancellationToken cancellationToken = default)
+        public ValueTask<long> GetCountAsync(CancellationToken cancellationToken = default)
         {
             throw new NotImplementedException();
         }

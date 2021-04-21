@@ -10,7 +10,7 @@ namespace Fra.Domain.Repositories
     {
         Task<List<TEntity>> GetListAsync(CancellationToken cancellationToken = default);
 
-        Task<long> GetCountAsync(CancellationToken cancellationToken = default);
+        ValueTask<long> GetCountAsync(CancellationToken cancellationToken = default);
 
         Task<List<TEntity>> GetPagedListAsync(int skipCount, int limit, CancellationToken cancellationToken = default);
     }

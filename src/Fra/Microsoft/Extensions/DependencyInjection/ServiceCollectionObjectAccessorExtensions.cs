@@ -18,6 +18,11 @@ namespace Microsoft.Extensions.DependencyInjection
             return objectAccessor;
         }
 
+        public static ObjectAccessor<T> AddObjectAccessor<T>(this IServiceCollection services, T instance)
+        {
+            return services.AddObjectAccessor(new ObjectAccessor<T>(instance));
+        }
+
         public static ObjectAccessor<T> AddObjectAccessor<T>(this IServiceCollection services)
         {
             return services.AddObjectAccessor<T>(new ObjectAccessor<T>());
