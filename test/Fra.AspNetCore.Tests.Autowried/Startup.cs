@@ -1,3 +1,6 @@
+using AspectCore.Extensions.DependencyInjection;
+using Fra.AspNetCore.Tests.Autowried.Repositories;
+using Fra.AspNetCore.Tests.Autowried.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -9,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging.Console;
 
 namespace Fra.AspNetCore.Tests.Autowried
 {
@@ -24,7 +28,17 @@ namespace Fra.AspNetCore.Tests.Autowried
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //services.AddTransient<ILogger,ConsoleLoggerExtensions.>
+            //services.AddLogging();
+            //services.AddTransient<IWeatherForecastServices, WeatherForecastServices>();
+            //services.AddTransient<IWeatherForecastRepository, WeatherForecastRepository>();
+            //services.AddControllers().AddControllersAsServices();
+            //services.ConfigureDynamicProxy();
 
+            //foreach (var item in services)
+            //{
+            //    Console.WriteLine(item.ImplementationType);
+            //}
             services.AddApplication<FraAspNetCoreTestModule>();
         }
 
@@ -33,7 +47,22 @@ namespace Fra.AspNetCore.Tests.Autowried
         {
             app.InitializeApplication();
 
+            //            var app = context.GetApplicationBuilder();
+            //          var env = context.GetEnvironment();
 
+            //if (env.IsDevelopment())
+            //{
+            //    app.UseDeveloperExceptionPage();
+            //}
+
+            //app.UseRouting();
+
+            //app.UseAuthorization();
+
+            //app.UseEndpoints(endpoints =>
+            //{
+            //    endpoints.MapControllers();
+            //});
         }
     }
 }

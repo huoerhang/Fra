@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AspectCore.Extensions.DependencyInjection;
 using Fra.Modularity;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
@@ -14,7 +15,13 @@ namespace Fra.AspNetCore.Tests.Autowried
     {
         public override void ConfigureServices(ServiceConfigurationContext context)
         {
+            
             context.Services.AddControllers();
+
+            foreach (var item in context.Services)
+            {
+                Console.WriteLine(item.ImplementationType);
+            }
         }
 
         public void OnApplicationInitialization(ApplicationInitializationContext context)
