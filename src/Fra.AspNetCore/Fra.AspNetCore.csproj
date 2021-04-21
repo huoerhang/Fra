@@ -2,7 +2,6 @@
   <Import Project="..\common.props" />
 
   <ItemGroup>
-    <ProjectReference Include="..\Fra.AspectCore\Fra.AspectCore.csproj" />
     <ProjectReference Include="..\Fra\Fra.csproj" />
   </ItemGroup>
 

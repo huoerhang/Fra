@@ -17,11 +17,6 @@ namespace Fra.AspNetCore.Tests.Autowried
         {
             
             context.Services.AddControllers();
-
-            foreach (var item in context.Services)
-            {
-                Console.WriteLine(item.ImplementationType);
-            }
         }
 
         public void OnApplicationInitialization(ApplicationInitializationContext context)
