@@ -19,7 +19,7 @@ namespace Fra.Tests.DependencyInjection
 
         public Cat(IDog dog)
         {
-            _dog=dog;
+            _dog = dog;
         }
 
         public void Eat()

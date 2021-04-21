@@ -10,7 +10,7 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             if (services.Any(c => c.ServiceType == typeof(ObjectAccessor<T>)))
             {
-                throw new Exception($"The instance of {typeof(T).AssemblyQualifiedName} is registered.");
+                throw new Exception($"The instance of {typeof(T).AssemblyQualifiedName} has registered.");
             }
 
             services.Insert(0, ServiceDescriptor.Singleton(typeof(ObjectAccessor<T>), objectAccessor));
@@ -45,7 +45,7 @@ namespace Microsoft.Extensions.DependencyInjection
                 return services.GetSingleInstance<ObjectAccessor<T>>();
             }
 
-            return services.AddObjectAccessor<T>(new ObjectAccessor<T>(instance));
+            return services.AddObjectAccessor<T>(instance);
         }
 
         public static T GetObjectAccessorOrNull<T>(this IServiceCollection services)
@@ -57,7 +57,7 @@ namespace Microsoft.Extensions.DependencyInjection
         public static T GetObjectAccessor<T>(this IServiceCollection services)
             where T : class
         {
-            return services.GetObjectAccessorOrNull<T>() ?? throw new Exception($"Could not find an object instance of {typeof(T).AssemblyQualifiedName}.");
+            return services.GetObjectAccessorOrNull<T>() ?? throw new Exception($"Could not found an object instance of {typeof(T).AssemblyQualifiedName}.");
         }
     }
 }
