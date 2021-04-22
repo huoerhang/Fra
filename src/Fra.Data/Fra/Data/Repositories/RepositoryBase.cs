@@ -1,4 +1,5 @@
-﻿using Fra.Domain.Entities;
+﻿using Fra.Data.Filter;
+using Fra.Domain.Entities;
 using Fra.Domain.Repositories;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,8 @@ namespace Fra.Data.Repositories
           where TEntity : class, IAggregateRoot
     {
         public IDataFilter DataFilter => LazyServiceProvider.LazyGetRequiredService<IDataFilter>();
+
+        protected IEnumerable<IDataFilterProcesser> DataFilterProcessers => LazyServiceProvider.LazyGetServices<IDataFilterProcesser>();
 
         public abstract Task<IQueryable<TEntity>> GetQueryableAsync();
 
@@ -31,6 +34,20 @@ namespace Fra.Data.Repositories
         }
 
         public abstract Task DeleteAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default);
+
+        protected virtual TQueryable ApplyDataFilters<TQueryable>(TQueryable query)
+            where TQueryable : IQueryable<TEntity>
+        {
+            if (!DataFilterProcessers.IsNullOrEmpty())
+            {
+                foreach (var process in DataFilterProcessers)
+                {
+                    query = (TQueryable)process.Process(query, DataFilter);
+                }
+            }
+
+            return query;
+        }
     }
 
     public abstract class RepositoryBase<TEntity, TKey> : RepositoryBase<TEntity>, IRepository<TEntity, TKey>

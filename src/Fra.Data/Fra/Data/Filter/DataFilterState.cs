@@ -1,4 +1,4 @@
-﻿namespace Fra.Data
+﻿namespace Fra.Data.Filter
 {
     public class DataFilterState
     {

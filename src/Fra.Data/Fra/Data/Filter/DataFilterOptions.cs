@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Fra.Data
+namespace Fra.Data.Filter
 {
     public  class DataFilterOptions
     {

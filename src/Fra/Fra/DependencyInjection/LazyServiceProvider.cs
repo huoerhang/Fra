@@ -56,5 +56,14 @@ namespace Fra.DependencyInjection
             return LazyGetService(serviceType, factory);
         }
 
+        public virtual IEnumerable<T> LazyGetServices<T>()
+        {
+            return (IEnumerable<T>)LazyGetServices(typeof(T));
+        }
+
+        public virtual IEnumerable<object> LazyGetServices(Type serviceType)
+        {
+            return (IEnumerable<object>)CachedServices.GetOrAdd(serviceType, () => ServiceProvider.GetServices(serviceType));
+        }
     }
 }

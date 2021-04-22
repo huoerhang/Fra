@@ -6,7 +6,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.Extensions.DependencyInjection;
 using Fra.DependencyInjection;
 
-namespace Fra.Data
+namespace Fra.Data.Filter
 {
     [Dependency]
     public class DataFilter : IDataFilter

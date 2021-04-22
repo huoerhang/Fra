@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Fra.Data
+namespace Fra.Data.Filter
 {
     public interface IDataFilter<TFilter>
         where TFilter : class

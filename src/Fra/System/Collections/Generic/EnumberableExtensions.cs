@@ -16,6 +16,11 @@ namespace System.Collections.Generic
         public static IEnumerable<T> WhereIf<T>(this IEnumerable<T> source, bool condition, Func<T, int, bool> predicate)
             => condition ? source.Where(predicate) : source;
 
+        public static bool IsNullOrEmpty<T>(this IEnumerable<T> source)
+        {
+            return source == null || source.Count() == 0;
+        }
+
         /// <summary>
         /// From http://www.codeproject.com/Articles/869059/Topological-sorting-in-Csharp
         /// </summary>

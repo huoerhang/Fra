@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Fra.DependencyInjection
 {
@@ -19,5 +20,9 @@ namespace Fra.DependencyInjection
         T LazyGetService<T>(Func<IServiceProvider, object> factory);
 
         object LazyGetService(Type serviceType, Func<IServiceProvider, object> factory);
+
+        IEnumerable<T> LazyGetServices<T>();
+
+        IEnumerable<object> LazyGetServices(Type serviceType);
     }
 }

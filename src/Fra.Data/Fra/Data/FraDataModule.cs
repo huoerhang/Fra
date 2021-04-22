@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Fra.Data.Filter;
 using Fra.Domain;
 using Fra.Modularity;
 using Microsoft.Extensions.DependencyInjection;
