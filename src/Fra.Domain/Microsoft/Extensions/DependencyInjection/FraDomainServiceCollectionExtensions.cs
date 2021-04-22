@@ -18,7 +18,7 @@ namespace Microsoft.Extensions.DependencyInjection
 
             if (container == null)
             {
-                services.AddObjectAccessor(new ObjectAccessor<EntityEqualizerContainer>(container));
+                services.AddObjectAccessor(new ObjectAccessor<EntityEqualizerContainer>(EntityEqualizerContainer.Instance));
             }
 
             return container;

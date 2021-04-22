@@ -12,6 +12,8 @@ namespace Fra.Data.Repositories
     public abstract class RepositoryBase<TEntity> : BasicRepositoryBase<TEntity>, IRepository<TEntity>
           where TEntity : class, IAggregateRoot
     {
+        public IDataFilter DataFilter => LazyServiceProvider.LazyGetRequiredService<IDataFilter>();
+
         public abstract Task<IQueryable<TEntity>> GetQueryableAsync();
 
         public abstract Task<TEntity> FindAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default);
