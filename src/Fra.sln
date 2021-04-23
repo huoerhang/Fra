@@ -21,6 +21,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fra.Data", "Fra.Data\Fra.Da
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fra.AspNetCore.Tests.Autowried", "..\test\Fra.AspNetCore.Tests.Autowried\Fra.AspNetCore.Tests.Autowried.csproj", "{D1AB7C8D-3ECB-4FDD-9939-08D30F79D62A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fra.Uow", "Fra.Uow\Fra.Uow.csproj", "{4F4E1259-338E-4779-BFCC-46FE0F0FFFD2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,6 +57,10 @@ Global
 		{D1AB7C8D-3ECB-4FDD-9939-08D30F79D62A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D1AB7C8D-3ECB-4FDD-9939-08D30F79D62A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D1AB7C8D-3ECB-4FDD-9939-08D30F79D62A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4F4E1259-338E-4779-BFCC-46FE0F0FFFD2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F4E1259-338E-4779-BFCC-46FE0F0FFFD2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F4E1259-338E-4779-BFCC-46FE0F0FFFD2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F4E1259-338E-4779-BFCC-46FE0F0FFFD2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -67,6 +73,7 @@ Global
 		{32F4ECF6-F86D-4F97-89F5-F4BF15FB4334} = {B254B318-7340-43DE-BF1C-9ABD227CC6A5}
 		{B1BB14AC-A9AA-4543-8748-E2288F3172FE} = {B254B318-7340-43DE-BF1C-9ABD227CC6A5}
 		{D1AB7C8D-3ECB-4FDD-9939-08D30F79D62A} = {3B270F47-F416-48F8-8A63-7C9B3BA64EB4}
+		{4F4E1259-338E-4779-BFCC-46FE0F0FFFD2} = {B254B318-7340-43DE-BF1C-9ABD227CC6A5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7F78880D-15E3-4591-B562-AE4BE3DD068E}

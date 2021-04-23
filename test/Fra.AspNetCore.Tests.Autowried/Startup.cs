@@ -11,8 +11,10 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging.Console;
+using Fra.Modularity;
 
 namespace Fra.AspNetCore.Tests.Autowried
 {
@@ -40,6 +42,19 @@ namespace Fra.AspNetCore.Tests.Autowried
             //    Console.WriteLine(item.ImplementationType);
             //}
             services.AddApplication<FraAspNetCoreTestModule>();
+            foreach(var  name in this.GetType().Assembly.GetReferencedAssemblies())
+            {
+                Assembly assembly = Assembly.Load(name);
+                foreach(var referAss in assembly.GetReferencedAssemblies())
+                {
+                    Console.WriteLine("\t"+referAss.Name);
+                }
+
+                //foreach(var type in  assembly.GetTypes().Where(t => t.IsClass && !t.IsAbstract && t.IsAssignableTo<IAppModule>()))
+                //{
+                //    Console.WriteLine(type.AssemblyQualifiedName);
+                //}
+            }
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
